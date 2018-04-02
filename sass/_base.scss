@@ -1,23 +1,42 @@
 .container{
     color: black;
-    margin: 10vh auto;
+    margin: 20vh auto;
     width: 80vh;
     height: 70vh;
     background-color: white;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    border: 5px solid grey;
+    border: 5px solid white;
     align-items: stretch;
     justify-items: stretch;
     border-collapse: collapse;
   }
+
+  .cross, .circle{
+    padding: 2rem 2rem;
+    font-size: 4rem;
+    font-family: 'Nanum Brush Script', cursive;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: grey;
+  }
   
-  .cell{
+  .cell {
     border: 2px solid black;
     display: grid;
     justify-items: center;
     align-items: center;
-    
-    
+    font-size: 4rem;
+    font-family: 'Nanum Brush Script', cursive;
+  }
+
+  .announcement, .choice {
+      position: absolute;
+      top: 2rem;
+      left: 7rem;
+      font-size: 3rem;
+      color: #336699;
+      opacity: 0;
+      font-family: 'Permanent Marker', cursive;
   }
