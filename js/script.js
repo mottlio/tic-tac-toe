@@ -15,47 +15,49 @@ $(document).ready(function() {
     var field_comp = "";
     var new_options = [];
     var win = 0;
+    var fields_marked = [];
     
 
     
-    $(".clickable").click(function(){
-        round += 1;
-        $(this).html("O");
-        $(this).removeClass("clickable");
+    $(".cell").click(function(){
         field_pl = $(this).data("field");
-        setTimeout(respond_comp, 150);
-        moves_pl.push(field_pl);
-        
-        console.log("moves_pl and moves_comp:");
-        console.log(moves_pl);
-        console.log(moves_comp);
+        fields_marked = moves_pl.concat(moves_comp);
+        console.log(fields_marked);
 
-//UPDATE REMAINING OPTIONS FOR COMP
-        if(round >= 2){
-            
-            for(var i = 0; i < options_comp.length; i++){
-                if(options_comp[i].indexOf(field_pl) == -1){
-                    console.log(options_comp[i]);
-                    new_options.push(options_comp[i]);
-                } 
+            if ((fields_marked.indexOf(field_pl) == -1) &&  win == 0 ){
+                round += 1;
+                    $(this).html("O");
+                    setTimeout(respond_comp, 150);
+                    moves_pl.push(field_pl);
+
+                    console.log("moves_pl and moves_comp:");
+                    console.log(moves_pl);
+                    console.log(moves_comp);
+
+                //UPDATE REMAINING OPTIONS FOR COMP
+                    if(round >= 2){
+
+                        for(var i = 0; i < options_comp.length; i++){
+                            if(options_comp[i].indexOf(field_pl) == -1){
+                                new_options.push(options_comp[i]);
+                            } 
+                        }
+
+                    }
+                //CHECK IF SOMEONE WON
+                    if(round >= 3){
+                        check_win();
+                    }
+                //CHECK IF IT"S A TIE
+                    if(round >= 5){
+                        if (win == 0){
+                            console.log("IT'S A TIE!");
+                            $("#tie").css("opacity", "1");
+                        }
+                    }
+
             }
-            
-            //console.log("options_comp in round "+round+":");
-            //console.log(new_options);
-            //console.log("should not contain:");
-            //console.log(field_pl);
-        }
-
-        if(round >= 3){
-            check_win();
-        }
-
-        if(round >= 5){
-            if (win == 0){
-                console.log("IT'S A TIE!");
-                $("#tie").css("opacity", "1");
-            }
-        }
+                    
 
     });
 
@@ -76,6 +78,7 @@ $(document).ready(function() {
                 for(var k = 0; k < winCom[i].length; k++){
                     $("[data-field = "+winCom[i][k]+"]").css("background-color", "#FFFF99");
                 }
+                win = 1;
             }
         }
         //CHECK IF COMPUTER WON
@@ -92,6 +95,7 @@ $(document).ready(function() {
                 for(var k = 0; k < winCom[i].length; k++){
                     $("[data-field = "+winCom[i][k]+"]").css("background-color", "#FFFF99");
                 }
+                win = 1;
             }
         }
 
@@ -128,9 +132,6 @@ $(document).ready(function() {
                         options_pl.push(winCom[i]);
                     }
                 }
-                
-            console.log("options_comp in round 1:");
-            console.log(options_comp);
             
         } else if(round == 2){
             
