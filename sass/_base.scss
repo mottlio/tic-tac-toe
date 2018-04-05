@@ -1,8 +1,15 @@
+::selection {
+  background: transparent; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: transparent; /* Gecko Browsers */
+}
+
 .container{
     color: black;
-    margin: 20vh auto;
-    width: 80vh;
-    height: 70vh;
+    margin: 20vh auto 5vh auto;
+    width: 60vh;
+    height: 50vh;
     background-color: white;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -14,12 +21,19 @@
   }
 
   .cross, .circle{
-    padding: 2rem 2rem;
-    font-size: 4rem;
-    font-family: 'Nanum Brush Script', cursive;
+    font-size: 5rem;
+    font-family: 'Permanent Marker', cursive;
     cursor: pointer;
     border-radius: 50%;
-    background-color: grey;
+  }
+
+  .cross{
+    margin-right: 1.5rem;
+  }
+
+  .circle{
+    margin-left: 1.5rem;
+    margin-right: 1rem;
   }
   
   .cell {
@@ -31,7 +45,7 @@
     font-family: 'Nanum Brush Script', cursive;
   }
 
-  .announcement, .choice {
+  .announcement {
       position: absolute;
       top: 2rem;
       left: 7rem;
@@ -39,4 +53,85 @@
       color: #336699;
       opacity: 0;
       font-family: 'Permanent Marker', cursive;
+  }
+
+ /* .choice {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(white, 0.8);
+    width: 75vw;
+    height: 75vh;
+    display: flex;
+    top: 2rem;
+    left: 7rem;
+    font-size: 3rem;
+    color: #336699;
+    opacity: 1;
+    font-family: 'Permanent Marker', cursive;
+    cursor: pointer;
+} */
+
+.popup{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(black, 0.4);
+  z-index: 20000;
+  //we can't animate it with display none
+  opacity: 0;
+  visibility: hidden;
+  //transition: all .3s;
+  } 
+
+  .choose{
+    //display: inline-block;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    font-size: 2rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Nanum Brush Script', cursive;
+    
+  }
+
+  .restart{
+    position: absolute;
+    right: 50vw;
+    transform: translateX(50%);
+    
+    text-align: center;
+    background-color: rgba(#CCCCCC, 0.6);
+    padding: 1rem;
+    color: white;
+    font-size: 2rem;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    font-family: 'Nanum Brush Script', cursive;
+    
+  }
+
+  .content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 30vw;
+    height: 30vh;
+    box-shadow: 0 2rem 4rem rgba(white, .2);
+    border-radius: 30px;
+    display: table;
+    overflow: hidden;
+    opacity: 0;
+    transition: all .5s .2s;
   }

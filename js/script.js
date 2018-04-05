@@ -6,7 +6,8 @@ $(document).ready(function() {
     ["a", "e", "i"], ["g", "e", "c"]];
     
     var round = 0;
-    
+    var player1 = "";
+    var player2 = "";
     var options_pl = [];
     var options_comp = [];
     var moves_pl = [];
@@ -16,6 +17,34 @@ $(document).ready(function() {
     var new_options = [];
     var win = 0;
     var fields_marked = [];
+
+    $(".content").css("opacity", "1");
+    $(".popup").css("opacity", "1");
+    $(".popup").css("visibility", "visible");
+
+    $(".cross").click(function(){
+        player1 = "X";
+        player2 = "O";
+
+        $(".content").css("opacity", "0");
+        $(".popup").css("opacity", "0");
+        $(".popup").css("visibility", "hidden");
+
+    });
+
+    $(".circle").click(function(){
+        player1 = "O";
+        player2 = "X";
+
+        $(".content").css("opacity", "0");
+        $(".popup").css("opacity", "0");
+        $(".popup").css("visibility", "hidden");
+
+    });
+
+    $(".restart").click(function(){
+        location.reload();
+    });
     
 
     
@@ -26,7 +55,7 @@ $(document).ready(function() {
 
             if ((fields_marked.indexOf(field_pl) == -1) &&  win == 0 ){
                 round += 1;
-                    $(this).html("O");
+                    $(this).html(player1);
                     setTimeout(respond_comp, 150);
                     moves_pl.push(field_pl);
 
@@ -53,6 +82,9 @@ $(document).ready(function() {
                         if (win == 0){
                             console.log("IT'S A TIE!");
                             $("#tie").css("opacity", "1");
+
+                            $(".restart").css("opacity", "1");
+                            $(".restart").css("visibility", "visible");
                         }
                     }
 
@@ -75,6 +107,8 @@ $(document).ready(function() {
             if (hits == 3){
                 console.log("YOU WON!");
                 $("#you").css("opacity", "1");
+                $(".restart").css("opacity", "1");
+                $(".restart").css("visibility", "visible");
                 for(var k = 0; k < winCom[i].length; k++){
                     $("[data-field = "+winCom[i][k]+"]").css("background-color", "#FFFF99");
                 }
@@ -92,6 +126,8 @@ $(document).ready(function() {
             if (hits == 3){
                 console.log("COMPUTER WON!");
                 $("#computer").css("opacity", "1");
+                $(".restart").css("opacity", "1");
+                $(".restart").css("visibility", "visible");
                 for(var k = 0; k < winCom[i].length; k++){
                     $("[data-field = "+winCom[i][k]+"]").css("background-color", "#FFFF99");
                 }
@@ -116,7 +152,7 @@ $(document).ready(function() {
                         var index = Math.floor(Math.random() * 4); 
                         field_comp = ["a", "c", "g", "i"][index];
                     }
-                    $("[data-field = "+field_comp+"]").html("X");
+                    $("[data-field = "+field_comp+"]").html(player2);
                     $("[data-field = "+field_comp+"]").removeClass("clickable");
                     moves_comp.push(field_comp);
                 
@@ -211,7 +247,7 @@ $(document).ready(function() {
             }
 
     //MAKE YOUR MOVE
-            $("[data-field = "+field_comp+"]").html("X");
+            $("[data-field = "+field_comp+"]").html(player2);
             //UPDATE YOUR LIST OF MOVES
             moves_comp.push(field_comp);
             console.log(field_comp);
@@ -275,7 +311,7 @@ $(document).ready(function() {
                     if(moves_comp.indexOf(opportunity[j]) == -1){
                         //OCCUPY THAT FIELD
                         field_comp = opportunity[j];
-                        $("[data-field = "+field_comp+"]").html("X");
+                        $("[data-field = "+field_comp+"]").html(player2);
                         //UPDATE YOUR LIST OF MOVES
                         moves_comp.push(field_comp);
                     }
@@ -290,7 +326,7 @@ $(document).ready(function() {
                     if(moves_pl.indexOf(risk[j]) == -1){
                         //OCCUPY THAT FIELD
                         field_comp = risk[j];
-                        $("[data-field = "+field_comp+"]").html("X");
+                        $("[data-field = "+field_comp+"]").html(player2);
                         //UPDATE YOUR LIST OF MOVES
                         moves_comp.push(field_comp);
                     }
@@ -320,7 +356,7 @@ $(document).ready(function() {
 
                 
                 //OCCUPY THAT FIELD
-                $("[data-field = "+field_comp+"]").html("X");
+                $("[data-field = "+field_comp+"]").html(player2);
                 moves_comp.push(field_comp); 
             }
 
@@ -373,7 +409,7 @@ var act = function(){
                     if(moves_comp.indexOf(opportunity[j]) == -1){
                         //OCCUPY THAT FIELD
                         field_comp = opportunity[j];
-                        $("[data-field = "+field_comp+"]").html("X");
+                        $("[data-field = "+field_comp+"]").html(player2);
                         //UPDATE YOUR LIST OF MOVES
                         moves_comp.push(field_comp);
                     }
@@ -387,7 +423,7 @@ var act = function(){
                     if(moves_pl.indexOf(risk[j]) == -1){
                         //OCCUPY THAT FIELD
                         field_comp = risk[j];
-                        $("[data-field = "+field_comp+"]").html("X");
+                        $("[data-field = "+field_comp+"]").html(player2);
                         //UPDATE YOUR LIST OF MOVES
                         moves_comp.push(field_comp);
                     }
@@ -414,7 +450,7 @@ var act = function(){
                 field_comp = fields_available[random];
                 
                 //OCCUPY THAT FIELD
-                $("[data-field = "+field_comp+"]").html("X");
+                $("[data-field = "+field_comp+"]").html(player2);
                 moves_comp.push(field_comp); 
             }
 
