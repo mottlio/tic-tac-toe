@@ -84,7 +84,7 @@ $(document).ready(function() {
                 round += 1;
                     $(this).html(player1);
                     moves_pl.push(field_pl);
-                    setTimeout(respond_comp, 100);
+                    setTimeout(respond_comp, 350);
 
                     console.log("moves_pl and moves_comp:");
                     console.log(moves_pl);
